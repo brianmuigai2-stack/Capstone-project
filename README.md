@@ -1,5 +1,7 @@
 # Ruby Beginner Toolkit API
 
+**Author:** Brian Muigai
+
 A simple REST API built with Sinatra to help beginners learn Ruby programming concepts. This toolkit provides endpoints to explore basic Ruby topics like variables, loops, and methods.
 
 ## Features
