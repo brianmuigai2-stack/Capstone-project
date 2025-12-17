@@ -1,0 +1,112 @@
+Building a Beginner's Ruby API Toolkit with Sinatra
+1. Title & Objective
+ Title:
+Prompt-Powered Kickstart: Building a Beginner’s Ruby API Toolkit with Sinatra
+ Chosen Technology:
+Ruby (Language) and Sinatra (Web Micro-Framework)
+ Why I Chose It:
+I chose Sinatra because it provides a minimal, "batteries-not-included" approach, making it an ideal candidate for a beginner to learn the core concepts of routing, HTTP, and API creation without the complexity of a large framework like Rails. Using Ruby also fulfilled the project requirement of choosing a language outside of Python, Java, and JavaScript.
+ End Goal:
+The end goal is to create a simple, modular REST API that returns consistent JSON responses and includes fundamental features like a health check and graceful 404 error handling.
+
+2. Quick Summary of the Technology
+What is it?
+Ruby is a dynamic, open-source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write. Sinatra is a free, open-source software web application library and domain-specific language (DSL) written in Ruby. It is classified as a micro-framework because it requires minimal configuration and is not tied to any specific database or components.
+Where is it used?
+Ruby: Widely used for large-scale web applications (via Ruby on Rails), automation scripts, and server-side processing.
+Sinatra: Excellent for building small APIs, lightweight microservices, and dedicated backend services where a full framework is overkill.
+One Real-World Example:
+Sinatra is often used by companies to create specific, performant API gateways or internal tools that need to be deployed quickly and run efficiently.
+
+3. System Requirements
+Requirement
+Details
+Command to Verify
+Operating System
+Linux, macOS, or Windows (via WSL/Git Bash)
+N/A
+Language
+Ruby 2.7+
+ruby -v
+Dependency Manager
+Bundler 2.4.22+
+bundle -v
+Editor
+VS Code or preferred text editor
+N/A
+Testing Tool
+Curl or Postman
+curl --version
+
+
+4. Installation & Setup Instructions
+Step 1: Install Ruby and Bundler
+If Ruby is not installed, use your package manager (e.g., apt for Debian/Ubuntu) to install it, along with the Bundler gem for dependency management.
+Step 2: Initialize Project and Create Gemfile
+Create a new directory for the project and a Gemfile inside it that specifies the Sinatra dependency.
+Step 3: Install Dependencies
+Run Bundler to download and install the Sinatra gem.
+Step 4: Create Modular Files
+Create the necessary directories (data, helpers) and the three core files (app.rb, data/topics.rb, helpers/json_helper.rb) for the modular structure.
+
+5. Minimal Working Example
+This project demonstrates a fully modular API with data separation and a JSON helper.
+Example Functionality:
+The API provides four basic endpoints: /, /health, /topics (all resources), and /topics/:id (single resource). The code separates concerns into three files: data/topics.rb (data source), helpers/json_helper.rb (response formatting), and app.rb (main application logic and routes).
+Expected Output
+Run the application: ruby app.rb
+Test the 404 endpoint using curl:
+Bash
+curl -i http://localhost:4567/topics/99
+Expected Output: (Shows 404 status and JSON body)
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+...
+{"error":"Topic ID '99' not found"}
+
+
+
+6. AI Prompt used (Learning Reflections)
+Prompt Used
+Purpose & Strategy
+Learning Outcome
+"Teach me Ruby as a beginner and show how to create a simple API"
+General Learning: This served as the initial "Zero-Shot Prompt" to grasp the foundational syntax of Ruby and connect it immediately to the concept of a web application/API.
+Provided Ruby basics and the minimal "Hello World" Sinatra setup, reducing initial setup friction.
+"Show me a minimal Sinatra Hello World API"
+Scaffolding: A focused instructional prompt to get a runnable piece of code immediately for rapid prototyping.
+Gave the core working code required to instantly scaffold the project and confirm the gem installation was successful.
+"How do I structure a Sinatra project for multiple endpoints?"
+Structural Design: This prompt was crucial for moving beyond a single file and adopting modularity, a key project goal.
+Suggested separating code into routes (in app.rb), helpers (for JSON), and data (for topics), leading to a professional project layout.
+"How to return consistent JSON responses in Sinatra?"
+Best Practice Implementation: An instructional prompt focusing on API consistency and developer-friendliness.
+Explained the need for a helper module that sets the Content-Type: application/json header and uses Ruby's built-in .to_json method, ensuring all endpoints return parsable data.
+"How to handle missing data or invalid IDs in Sinatra routes?"
+Error Handling: Focused on implementing industry-standard error responses.
+Recommended returning a 404 Not Found status code along with a descriptive JSON body for requests targeting resources that do not exist (like /topics/99).
+"Best way to test Sinatra API endpoints locally"
+Verification: A practical, instructional prompt to establish a testing methodology.
+Confirmed using command-line tools like curl or external applications like Postman to quickly verify functionality and JSON output without needing a front-end.
+
+
+7. Common Issues & Fixes
+Issue
+Initial Error/Symptom
+Resolution
+Reference
+Missing Dependency
+cannot load such file -- sinatra (LoadError)
+Ran bundle install. The initial Gemfile setup was correct, but the installation step was missed.
+Official Sinatra Docs
+Port Conflict
+== Sinatra has taken the stage on 4567 (then hangs or fails to load)
+Used the alternative execution command: ruby app.rb -p 5678 to switch to a free port.
+StackOverflow / General UNIX
+404 Not Working
+Tried to access a topic, but the page returned a generic HTML error instead of my custom JSON 404.
+Realized the dependency for the JSON helper was missing in app.rb. The fix was adding the required dependency and declaring the use of the helper.
+AI Prompt Journal (Helped trace the dependency issue)
+
+
+
